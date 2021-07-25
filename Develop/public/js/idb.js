@@ -68,3 +68,32 @@ function checkDatabase() {
         }
     };
 }
+
+request.onsuccess = function (e) {
+    console.log('success');
+    db = e.target.result;
+
+    // check if online
+    if (navigator.onLine) {
+        console.log('WE ARE ONLINE');
+        checkDatabase();
+    }
+
+};
+
+const saveRecord = (record) => {
+    console.log('Save record invoked');
+
+    // create a transaction with readwrite access
+    const transaction = db.transaction(['BudgetStore'], 'readwrite');
+
+    // access your BudgetStore object
+    const store = transaction.objectStore('BudgetStore');
+
+    // add record
+    store.add(record);
+};
+
+// listen for coming back online
+window.addEventListener('online', checkDatabase);
+
