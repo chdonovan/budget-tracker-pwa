@@ -32,3 +32,20 @@ self.addEventListener("install", function(evt){
     // tells the browser to activate service worker once it has finished installing
     self.skipWaiting();
 });
+
+// ACTIVATE
+self.addEventListener("activate", function(evt){
+    evt.waitUntil(
+        caches.keys().then(keyList => {
+            return Promise.all(
+                keyList.map(key => {
+                    if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
+                        console.log("remove old cache data", key);
+                        return caches.delete(key);
+                    }
+                })
+            )
+        })
+    );
+    self.clients.claim();
+});
