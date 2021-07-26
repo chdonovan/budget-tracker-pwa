@@ -16,3 +16,19 @@ const FILES_TO_CACHE = [
     "/icons/icon-384x384.png",
     "/icons/icon-512x612.png",
 ];
+
+// install
+self.addEventListener("install", function(evt){
+    // pre cache img data
+    evt.waitUntil(
+        caches.open(DATA_CACHE_NAME).then((cache) => cache.add("/"))
+    );
+
+    // pre cache all static assets
+    evt.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
+    );
+
+    // tells the browser to activate service worker once it has finished installing
+    self.skipWaiting();
+});
