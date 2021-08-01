@@ -34,7 +34,7 @@ Offline Functionality:
 Chris Donovan => find me on [GitHub](https://github.com/chdonovan) or email me at chrisdonovan311@gmail.com
 
 ## Screenshot
-![alt-text](./assets/screenshot.png)
+![alt-text](./assets/Screenshot.png)
 
 ## Deployed
 
